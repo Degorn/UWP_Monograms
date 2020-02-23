@@ -136,6 +136,7 @@
     <Compile Include="Infrastructure\Events\CellActionEventArgs.cs" />
     <Compile Include="Infrastructure\Events\PointsRangeEventArgs.cs" />
     <Compile Include="Infrastructure\Extensions\ColorExtension.cs" />
+    <Compile Include="Infrastructure\Interfaces\ICellSelectionManager.cs" />
     <Compile Include="Infrastructure\Managers\ImageManager.cs" />
     <Compile Include="Infrastructure\Managers\CellSelectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,6 +190,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Infrastructure\Converters\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,9 +217,7 @@
       <Name>MonogramsLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Infrastructure\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

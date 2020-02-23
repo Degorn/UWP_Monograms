@@ -1,16 +1,14 @@
-﻿<!--<Application
-    x:Class="UWP_Monograms.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:UWP_Monograms">
-
-</Application>-->
-
-<cm:CaliburnApplication x:Class="UWP_Monograms.App"
+﻿<cm:CaliburnApplication x:Class="UWP_Monograms.App"
                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        xmlns:local="using:UWPCaliburnMicro"
                         xmlns:cm="using:Caliburn.Micro"
                         RequestedTheme="Light">
 
+    <cm:CaliburnApplication.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Infrastructure/Converters/Converters.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </cm:CaliburnApplication.Resources>
 </cm:CaliburnApplication>

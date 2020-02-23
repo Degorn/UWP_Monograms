@@ -6,14 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using UWP_Monograms.Infrastructure.Events;
+using UWP_Monograms.Infrastructure.Interfaces;
 using UWP_Monograms.Infrastructure.Managers;
 
 namespace UWP_Monograms.ViewModels
 {
 	public class MainViewModel : Screen
 	{
-		private readonly CellSelectionManager _cellSelectionManager;
-
 		public Monogram Monogram;
 
 		public CellViewModel[,] CellsArray;
@@ -23,12 +22,12 @@ namespace UWP_Monograms.ViewModels
 
 		public ObservableCollection<CellViewModel> Cells { get; set; } = new ObservableCollection<CellViewModel>();
 
-		public MainViewModel()
+		public MainViewModel(ICellSelectionManager cellSelectionManager)
 		{
 			InitializeMonogram();
 
-			_cellSelectionManager = new CellSelectionManager(CellsArray);
-			_cellSelectionManager.SendRange += CellSelectionManager_SendRange;
+			cellSelectionManager.SetCells(CellsArray);
+			cellSelectionManager.SendRange += CellSelectionManager_SendRange;
 		}
 
 		private void InitializeMonogram()

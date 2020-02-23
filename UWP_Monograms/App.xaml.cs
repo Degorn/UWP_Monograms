@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWP_Monograms.Infrastructure;
+using UWP_Monograms.Infrastructure.Interfaces;
+using UWP_Monograms.Infrastructure.Managers;
 using UWP_Monograms.ViewModels;
 using UWP_Monograms.Views;
 using Windows.ApplicationModel;
@@ -45,8 +47,9 @@ namespace UWP_Monograms
 			_container.RegisterWinRTServices();
 
 			_container
-				.PerRequest<ShellViewModel>()
-				.PerRequest<MainViewModel>();
+				.Singleton<ShellViewModel>()
+				.Singleton<MainViewModel>()
+				.Singleton<ICellSelectionManager, CellSelectionManager>();
 		}
 
 		/// <summary>

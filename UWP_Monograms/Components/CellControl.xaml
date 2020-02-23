@@ -5,15 +5,10 @@
     xmlns:local="using:UWP_Monograms.Components"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:UWP_Monograms.Infrastructure.Converters"
     mc:Ignorable="d"
     d:DesignHeight="50"
     d:DesignWidth="50">
 
-    <UserControl.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
-    </UserControl.Resources>
-    
     <Grid PointerEntered="OnPointerEntered"
           PointerExited="OnPointerExited"
           PointerPressed="OnPointerPressed"

@@ -1,10 +1,11 @@
 ﻿using System.Drawing;
 using UWP_Monograms.Infrastructure.Events;
+using UWP_Monograms.Infrastructure.Interfaces;
 using UWP_Monograms.ViewModels;
 
 namespace UWP_Monograms.Infrastructure.Managers
 {
-	public class CellSelectionManager
+	public class CellSelectionManager : ICellSelectionManager
 	{
 		private Point
 			_startDragPoint,
@@ -13,14 +14,13 @@ namespace UWP_Monograms.Infrastructure.Managers
 
 		public CellViewModel[,] Cells { get; set; }
 
-		public delegate void SendRangeEventArgs(object sender, PointsRangeEventArgs e);
 		public event SendRangeEventArgs SendRange;
 
-		public CellSelectionManager(CellViewModel[,] cells)
+		public void SetCells(CellViewModel[,] cellsArray)
 		{
-			Cells = cells;
+			Cells = cellsArray;
 
-			foreach (var cell in cells)
+			foreach (var cell in cellsArray)
 			{
 				cell.OnHoverIn += Cell_OnHovered;
 				cell.OnHoverOut += Cell_OnHoverOut;
