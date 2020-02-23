@@ -1,16 +1,12 @@
-﻿using Windows.UI.Xaml;
+﻿using UWP_Monograms.ViewModels;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
 namespace UWP_Monograms.Components
 {
 	public sealed partial class CellControl : UserControl
 	{
-		private bool _hovered;
-
-		public int X { get; set; }
-		public int Y { get; set; }
-
 		public Brush Fill
 		{
 			get => CellContent.Fill;
@@ -29,22 +25,36 @@ namespace UWP_Monograms.Components
 			set => CellContent.StrokeThickness = value;
 		}
 
-		public bool Hovered
-		{
-			get => _hovered;
-			set
-			{
-				_hovered = value;
-
-				HoverBlock.Visibility = _hovered
-					? Visibility.Visible
-					: Visibility.Collapsed;
-			}
-		}
+		public CellViewModel ViewModel { get; set; }
 
 		public CellControl()
 		{
 			this.InitializeComponent();
+		}
+
+		private void OnPointerEntered(object sender, PointerRoutedEventArgs e)
+		{
+			ViewModel.HoverIn();
+		}
+
+		private void OnPointerExited(object sender, PointerRoutedEventArgs e)
+		{
+			ViewModel.HoverOut();
+		}
+
+		private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
+		{
+			ViewModel.Pressed();
+		}
+
+		private void OnPointerReleased(object sender, PointerRoutedEventArgs e)
+		{
+			ViewModel.Released();
+		}
+
+		private void OnPointerMoved(object sender, PointerRoutedEventArgs e)
+		{
+			ViewModel.Moved();
 		}
 	}
 }

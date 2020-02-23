@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:MonogramsLib.Models"
     xmlns:conditions="using:UWP_Monograms.Components.Conditions"
+    xmlns:components="using:UWP_Monograms.Components"
+    xmlns:models1="using:UWP_Monograms.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -24,6 +26,10 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
+
+        <DataTemplate x:Key="Dd">
+            
+        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -58,7 +64,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <ItemsControl ItemsSource="{x:Bind RowsConditions, Mode=OneWay}"
+            <ItemsControl ItemsSource="{x:Bind ViewModel.RowsConditions, Mode=OneWay}"
                           Grid.Row="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -86,7 +92,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <ItemsControl ItemsSource="{x:Bind ColumnsConditions, Mode=OneWay}"
+            <ItemsControl ItemsSource="{x:Bind ViewModel.ColumnsConditions, Mode=OneWay}"
                           Grid.Column="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -114,13 +120,25 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <VariableSizedWrapGrid x:Name="FieldGrid"
-                                   Grid.Column="1"
-                                   Grid.Row="1"
-                                   MaximumRowsOrColumns="10"
-                                   ItemWidth="{StaticResource CellWidth}"
-                                   ItemHeight="{StaticResource CellHeight}"/>
+            <ItemsControl Grid.Column="1"
+                          Grid.Row="1"
+                          ItemsSource="{x:Bind ViewModel.Cells}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VariableSizedWrapGrid MaximumRowsOrColumns="10"
+                                               ItemWidth="{StaticResource CellWidth}"
+                                               ItemHeight="{StaticResource CellHeight}"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="models1:CellViewModel">
+                        <components:CellControl ViewModel="{x:Bind}"
+                                                StrokeThickness="2"
+                                                Stroke="Black"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
         </Grid>
     </Grid>
-
 </Page>

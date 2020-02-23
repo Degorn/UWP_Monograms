@@ -131,14 +131,24 @@
     <Compile Include="Components\Conditions\ConditionPackControl.xaml.cs">
       <DependentUpon>ConditionPackControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Infrastructure\Defines.cs" />
+    <Compile Include="Infrastructure\Events\CellActionEventArgs.cs" />
+    <Compile Include="Infrastructure\Events\PointsRangeEventArgs.cs" />
     <Compile Include="Infrastructure\Extensions\ColorExtension.cs" />
     <Compile Include="Infrastructure\ImageManager\ImageManager.cs" />
+    <Compile Include="Infrastructure\Managers\CellSelectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CellViewModel.cs" />
     <Compile Include="ViewModels\ConditionItemViewModel.cs" />
     <Compile Include="ViewModels\ConditionsPackViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +193,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro">
@@ -198,6 +212,7 @@
       <Name>MonogramsLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
