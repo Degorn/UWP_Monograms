@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Graphics.Imaging;
 
-namespace UWP_Monograms.Infrastructure.ImageManager
+namespace UWP_Monograms.Infrastructure.Managers
 {
 	public static class ImageManager
 	{

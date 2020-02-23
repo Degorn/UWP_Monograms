@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using UWP_Monograms.Infrastructure.Events;
-using UWP_Monograms.Infrastructure.ImageManager;
 using UWP_Monograms.Infrastructure.Managers;
 
 namespace UWP_Monograms.ViewModels
