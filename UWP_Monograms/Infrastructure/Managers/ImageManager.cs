@@ -9,7 +9,7 @@ namespace UWP_Monograms.Infrastructure.Managers
 {
 	public class ImageManager : IImageManager
 	{
-		public async Task<Color[,]> GetImage(string path)
+		public async Task<Color[,]> GetImageAsync(string path)
 		{
 			var imageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(path);
 			var imagestream = await imageFile.OpenStreamForReadAsync();
@@ -31,6 +31,8 @@ namespace UWP_Monograms.Infrastructure.Managers
 					result[y, x] = Color.FromArgb(bytes[k + 3], bytes[k + 2], bytes[k + 1], bytes[k + 0]);
 				}
 			}
+
+			await Task.Delay(3000);
 
 			return result;
 		}

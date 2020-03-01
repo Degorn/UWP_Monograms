@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using UWP_Monograms.ViewModels;
+using System.Threading.Tasks;
 
 namespace UWP_Monograms.Views
 {
@@ -18,9 +19,9 @@ namespace UWP_Monograms.Views
 			};
 		}
 
-		private void OnRestartTapped(object sender, TappedRoutedEventArgs e)
+		private async void OnRestartTapped(object sender, TappedRoutedEventArgs e)
 		{
-			ViewModel.ResetLevel();
+			await ViewModel.ResetLevelAsync();
 		}
 
 		private void OnFirstImageButtonTapped(object sender, TappedRoutedEventArgs e)
@@ -33,9 +34,9 @@ namespace UWP_Monograms.Views
 			StartLevel(1);
 		}
 
-		private void StartLevel(int number)
+		private async void StartLevel(int number)
 		{
-			ViewModel.InitializeMonogram(number);
+			await ViewModel.InitializeMonogramAsync(number);
 		}
 	}
 }

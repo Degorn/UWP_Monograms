@@ -3,10 +3,10 @@ using MonogramsLib;
 using MonogramsLib.Extensions;
 using MonogramsLib.Models;
 using MonogramsLib.Models.Events;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using UWP_Monograms.Infrastructure.Events;
 using UWP_Monograms.Infrastructure.Interfaces;
 
@@ -61,10 +61,10 @@ namespace UWP_Monograms.ViewModels
 			LevelManager = levelManager;
 			_cellSelectionManager = cellSelectionManager;
 
-			InitializeMonogram(0);
+			InitializeMonogramAsync(0);
 		}
 
-		public void InitializeMonogram(int level)
+		public async Task InitializeMonogramAsync(int level)
 		{
 			ResetField();
 
@@ -72,12 +72,12 @@ namespace UWP_Monograms.ViewModels
 			Monogram.CellOpened += OnMonogramCellOpened;
 			Monogram.ConditionDone += OnConditionDone;
 
-			InitializeField(level);
+			await InitializeFieldAsync(level);
 		}
 
-		public void InitializeField(int levelIndex)
+		public async Task InitializeFieldAsync(int levelIndex)
 		{
-			var level = LevelManager.TryToSelectLevel(levelIndex);
+			var level = await LevelManager.TryToSelectLevelAsync(levelIndex);
 
 			Monogram.GenerateFrom(level);
 
@@ -144,10 +144,10 @@ namespace UWP_Monograms.ViewModels
 			}
 		}
 
-		public void ResetLevel()
+		public async Task ResetLevelAsync()
 		{
 			ResetField();
-			InitializeMonogram(LevelManager.CurrentLevet);
+			await InitializeMonogramAsync(LevelManager.CurrentLevet);
 		}
 
 		public void ResetField()

@@ -1,10 +1,11 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 
 namespace UWP_Monograms.Infrastructure.Interfaces
 {
 	public interface ILevelSelectionManager
 	{
 		void AddLevel(string path);
-		Color[,] GetLevel(int number);
+		Task<Color[,]> GetLevelAsync(int number);
 	}
 }

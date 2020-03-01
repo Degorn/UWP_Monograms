@@ -37,7 +37,7 @@ namespace UWP_Monograms.Infrastructure.Managers
 			LevelsDictionary.Add(newIndex, path);
 		}
 
-		public Color[,] GetLevel(int number)
+		public async Task<Color[,]> GetLevelAsync(int number)
 		{
 			if (!LevelsDictionary.ContainsKey(number))
 			{
@@ -45,7 +45,7 @@ namespace UWP_Monograms.Infrastructure.Managers
 			}
 
 			var path = LevelsDictionary[number];
-			return Task.Run(async () => await _imageManager.GetImage(path)).Result;
+			return await _imageManager.GetImageAsync(path);
 		}
 	}
 }

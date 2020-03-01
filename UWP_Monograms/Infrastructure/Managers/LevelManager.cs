@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using UWP_Monograms.Infrastructure.Interfaces;
 
 namespace UWP_Monograms.Infrastructure.Managers
@@ -15,11 +16,11 @@ namespace UWP_Monograms.Infrastructure.Managers
 			SelectionManager = levelSelectionManager;
 		}
 
-		public Color[,] TryToSelectLevel(int number)
+		public async Task<Color[,]> TryToSelectLevelAsync(int number)
 		{
 			try
 			{
-				var level = SelectionManager.GetLevel(number);
+				var level = await SelectionManager.GetLevelAsync(number);
 				CurrentLevet = number;
 
 				return level;

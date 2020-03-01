@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 
 namespace UWP_Monograms.Infrastructure.Interfaces
 {
@@ -8,6 +9,6 @@ namespace UWP_Monograms.Infrastructure.Interfaces
 
 		int CurrentLevet { get; }
 
-		Color[,] TryToSelectLevel(int number);
+		Task<Color[,]> TryToSelectLevelAsync(int number);
 	}
 }

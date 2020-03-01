@@ -5,6 +5,6 @@ namespace UWP_Monograms.Infrastructure.Interfaces
 {
 	public interface IImageManager
 	{
-		Task<Color[,]> GetImage(string path);
+		Task<Color[,]> GetImageAsync(string path);
 	}
 }
