@@ -1,7 +1,9 @@
 ﻿using Caliburn.Micro;
 using MonogramsLib;
+using MonogramsLib.Extensions;
 using MonogramsLib.Models;
 using MonogramsLib.Models.Events;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,11 +16,11 @@ namespace UWP_Monograms.ViewModels
 	{
 		private readonly ICellSelectionManager _cellSelectionManager;
 
-		public ILevelManager LevelManager { get; }
-
 		private ObservableCollection<ConditionPackViewModel> _columnsConditions;
 		private ObservableCollection<ConditionPackViewModel> _rowsConditions;
 		private ObservableCollection<CellViewModel> _cells;
+
+		public ILevelManager LevelManager { get; }
 
 		public ObservableCollection<ConditionPackViewModel> ColumnsConditions
 		{
@@ -52,8 +54,6 @@ namespace UWP_Monograms.ViewModels
 
 		public Monogram Monogram { get; set; }
 
-		public CellViewModel[,] CellsArray { get; set; }
-
 		public MainViewModel(
 			ICellSelectionManager cellSelectionManager,
 			ILevelManager levelManager)
@@ -73,9 +73,6 @@ namespace UWP_Monograms.ViewModels
 			Monogram.ConditionDone += OnConditionDone;
 
 			InitializeField(level);
-
-			_cellSelectionManager.SetCells(CellsArray);
-			_cellSelectionManager.SendRange += CellSelectionManager_SendRange;
 		}
 
 		public void InitializeField(int levelIndex)
@@ -87,7 +84,15 @@ namespace UWP_Monograms.ViewModels
 			ColumnsConditions = new ObservableCollection<ConditionPackViewModel>(GetConditions(Monogram.ColumnsConditions));
 			RowsConditions = new ObservableCollection<ConditionPackViewModel>(GetConditions(Monogram.RowsConditions));
 
-			CreateCells();
+			var cells = CreateCellsArray();
+			InitializeCellsCollection(cells);
+			SetupCellSelectionManager(cells);
+		}
+
+		private void SetupCellSelectionManager(CellViewModel[,] cells)
+		{
+			_cellSelectionManager.SetCells(cells);
+			_cellSelectionManager.SendRange += CellSelectionManager_SendRange;
 		}
 
 		private IEnumerable<ConditionPackViewModel> GetConditions(IEnumerable<ConditionsPack> conditionsPacks)
@@ -106,23 +111,35 @@ namespace UWP_Monograms.ViewModels
 			Monogram.TryToOpenRange(x1, y1, x2, y2);
 		}
 
-		private void CreateCells()
+		private CellViewModel[,] CreateCellsArray()
 		{
-			CellsArray = new CellViewModel[Monogram.Height, Monogram.Width];
-			Cells = new ObservableCollection<CellViewModel>();
+			var cellsArray = new CellViewModel[Monogram.Height, Monogram.Width];
 
 			for (int x = 0; x < Monogram.Width; x++)
 			{
 				for (int y = 0; y < Monogram.Height; y++)
 				{
-					CellsArray[y, x] = new CellViewModel
+					cellsArray[y, x] = new CellViewModel
 					{
 						Cell = Monogram.Field[y, x],
 						X = x,
 						Y = y,
 					};
+				}
+			}
 
-					Cells.Add(CellsArray[y, x]);
+			return cellsArray;
+		}
+
+		private void InitializeCellsCollection(CellViewModel[,] cells)
+		{
+			Cells = new ObservableCollection<CellViewModel>();
+
+			for (int x = 0; x < cells.GetWidth(); x++)
+			{
+				for (int y = 0; y < cells.GetHeight(); y++)
+				{
+					Cells.Add(cells[y, x]);
 				}
 			}
 		}
