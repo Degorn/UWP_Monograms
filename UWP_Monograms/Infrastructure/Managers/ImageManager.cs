@@ -32,8 +32,6 @@ namespace UWP_Monograms.Infrastructure.Managers
 				}
 			}
 
-			await Task.Delay(3000);
-
 			return result;
 		}
 	}
