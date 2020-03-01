@@ -1,39 +1,21 @@
 ﻿using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UWP_Monograms.Infrastructure;
 using UWP_Monograms.Infrastructure.Interfaces;
 using UWP_Monograms.Infrastructure.Managers;
 using UWP_Monograms.ViewModels;
 using UWP_Monograms.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace UWP_Monograms
 {
-	/// <summary>
-	/// Provides application-specific behavior to supplement the default Application class.
-	/// </summary>
 	sealed partial class App
 	{
 		private WinRTContainer _container;
 
-		/// <summary>
-		/// Initializes the singleton application object.  This is the first line of authored code
-		/// executed, and as such is the logical equivalent of main() or WinMain().
-		/// </summary>
 		public App()
 		{
 			this.InitializeComponent();
@@ -51,7 +33,8 @@ namespace UWP_Monograms
 				.Singleton<MainViewModel>()
 				.Singleton<ICellSelectionManager, CellSelectionManager>()
 				.Singleton<IImageManager, ImageManager>()
-				.Singleton<ILevelSelectionManager, LevelSelectionManager>();
+				.Singleton<ILevelSelectionManager, LevelSelectionManager>()
+				.Singleton<ILevelManager, LevelManager>();
 		}
 
 		/// <summary>

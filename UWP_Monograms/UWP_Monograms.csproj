@@ -133,7 +133,9 @@
     <Compile Include="Infrastructure\Extensions\ColorExtension.cs" />
     <Compile Include="Infrastructure\Interfaces\ICellSelectionManager.cs" />
     <Compile Include="Infrastructure\Interfaces\IImageManager.cs" />
+    <Compile Include="Infrastructure\Interfaces\ILevelManager.cs" />
     <Compile Include="Infrastructure\Interfaces\ILevelSelectionManager.cs" />
+    <Compile Include="Infrastructure\Managers\LevelManager.cs" />
     <Compile Include="Infrastructure\Managers\LevelSelectionManager.cs" />
     <Compile Include="Infrastructure\Managers\ImageManager.cs" />
     <Compile Include="Infrastructure\Managers\CellSelectionManager.cs" />

@@ -8,5 +8,7 @@ namespace MonogramsLib.Interfaces
 		bool CanBeOpened { get; set; }
 		bool Opened { get; set; }
 		Color CurrentColor { get; set; }
+
+		void Open();
 	}
 }

@@ -13,7 +13,8 @@ namespace UWP_Monograms.ViewModels
 	public class MainViewModel : Screen
 	{
 		private readonly ICellSelectionManager _cellSelectionManager;
-		private readonly ILevelSelectionManager _levelSelectionManager;
+
+		public ILevelManager LevelManager { get; }
 
 		private ObservableCollection<ConditionPackViewModel> _columnsConditions;
 		private ObservableCollection<ConditionPackViewModel> _rowsConditions;
@@ -55,16 +56,18 @@ namespace UWP_Monograms.ViewModels
 
 		public MainViewModel(
 			ICellSelectionManager cellSelectionManager,
-			ILevelSelectionManager levelSelectionManager)
+			ILevelManager levelManager)
 		{
+			LevelManager = levelManager;
 			_cellSelectionManager = cellSelectionManager;
-			_levelSelectionManager = levelSelectionManager;
 
 			InitializeMonogram(0);
 		}
 
 		public void InitializeMonogram(int level)
 		{
+			ResetField();
+
 			Monogram = new Monogram();
 			Monogram.CellOpened += OnMonogramCellOpened;
 			Monogram.ConditionDone += OnConditionDone;
@@ -77,7 +80,7 @@ namespace UWP_Monograms.ViewModels
 
 		public void InitializeField(int levelIndex)
 		{
-			var level = _levelSelectionManager.GetLevel(levelIndex);
+			var level = LevelManager.TryToSelectLevel(levelIndex);
 
 			Monogram.GenerateFrom(level);
 
@@ -124,11 +127,17 @@ namespace UWP_Monograms.ViewModels
 			}
 		}
 
+		public void ResetLevel()
+		{
+			ResetField();
+			InitializeMonogram(LevelManager.CurrentLevet);
+		}
+
 		public void ResetField()
 		{
-			Cells.Clear();
-			ColumnsConditions.Clear();
-			RowsConditions.Clear();
+			Cells?.Clear();
+			ColumnsConditions?.Clear();
+			RowsConditions?.Clear();
 		}
 
 		private void CellSelectionManager_SendRange(object sender, PointsRangeEventArgs e)

@@ -33,6 +33,7 @@ namespace UWP_Monograms.Infrastructure.Managers
 			var newIndex = LevelsDictionary.Keys.Count == 0
 				? 0
 				: LevelsDictionary.Keys.LastOrDefault() + 1;
+
 			LevelsDictionary.Add(newIndex, path);
 		}
 

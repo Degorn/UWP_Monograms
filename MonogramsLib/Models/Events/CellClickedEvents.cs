@@ -1,4 +1,5 @@
 ﻿using System;
+using MonogramsLib.Interfaces;
 
 namespace MonogramsLib.Models.Events
 {
@@ -6,6 +7,6 @@ namespace MonogramsLib.Models.Events
 
 	public class CellClickedEventArgs : EventArgs
 	{
-		public Cell Cell { get; set; }
+		public ICell Cell { get; set; }
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using MonogramsLib.Models;
+using MonogramsLib.Interfaces;
 using UWP_Monograms.Infrastructure.Events;
 using UWP_Monograms.Infrastructure.Extensions;
 using Windows.UI.Xaml.Media;
@@ -10,7 +10,7 @@ namespace UWP_Monograms.ViewModels
 	{
 		private bool _isHovered;
 
-		public Cell Cell { get; set; }
+		public ICell Cell { get; set; }
 
 		public int X { get; set; }
 

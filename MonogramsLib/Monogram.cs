@@ -1,4 +1,5 @@
 ﻿using MonogramsLib.Extensions;
+using MonogramsLib.Interfaces;
 using MonogramsLib.Managers;
 using MonogramsLib.Models;
 using MonogramsLib.Models.Events;
@@ -20,7 +21,7 @@ namespace MonogramsLib
 
 		private readonly ConditionManager _conditionManager;
 
-		public Cell[,] Field { get; set; }
+		public ICell[,] Field { get; set; }
 		public int Width { get; private set; }
 		public int Height { get; private set; }
 
