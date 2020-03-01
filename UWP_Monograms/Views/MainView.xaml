@@ -117,7 +117,7 @@
 
             <ItemsControl Grid.Column="1"
                           Grid.Row="1"
-                          ItemsSource="{x:Bind ViewModel.Cells}">
+                          ItemsSource="{x:Bind ViewModel.Cells, Mode=OneWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VariableSizedWrapGrid MaximumRowsOrColumns="10"
@@ -127,7 +127,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="models1:CellViewModel">
-                        <components:CellControl ViewModel="{x:Bind}"
+                        <components:CellControl ViewModel="{x:Bind Mode=OneWay}"
                                                 StrokeThickness="2"
                                                 Stroke="Black"/>
                     </DataTemplate>

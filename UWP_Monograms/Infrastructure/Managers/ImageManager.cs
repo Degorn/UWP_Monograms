@@ -2,13 +2,14 @@
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
+using UWP_Monograms.Infrastructure.Interfaces;
 using Windows.Graphics.Imaging;
 
 namespace UWP_Monograms.Infrastructure.Managers
 {
-	public static class ImageManager
+	public class ImageManager : IImageManager
 	{
-		public static async Task<Color[,]> GetImage(string path)
+		public async Task<Color[,]> GetImage(string path)
 		{
 			var imageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(path);
 			var imagestream = await imageFile.OpenStreamForReadAsync();

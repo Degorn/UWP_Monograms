@@ -49,7 +49,9 @@ namespace UWP_Monograms
 			_container
 				.Singleton<ShellViewModel>()
 				.Singleton<MainViewModel>()
-				.Singleton<ICellSelectionManager, CellSelectionManager>();
+				.Singleton<ICellSelectionManager, CellSelectionManager>()
+				.Singleton<IImageManager, ImageManager>()
+				.Singleton<ILevelSelectionManager, LevelSelectionManager>();
 		}
 
 		/// <summary>

@@ -16,24 +16,25 @@ namespace UWP_Monograms.Views
 			{
 				ViewModel = DataContext as MainViewModel;
 			};
+
 		}
 
 		private void OnRestartTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitializeMonogram(@"Assets\Images\2.png");
+			ViewModel.InitializeMonogram(1);
 		}
 
 		private void OnFirstImageButtonTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitializeMonogram(@"Assets\Images\1.png");
+			ViewModel.InitializeMonogram(0);
 		}
 
 		private void OnSecondImageButtonTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitializeMonogram(@"Assets\Images\2.png");
+			ViewModel.InitializeMonogram(1);
 		}
 	}
 }

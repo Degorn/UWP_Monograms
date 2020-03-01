@@ -1,5 +1,4 @@
 ﻿using MonogramsLib.Extensions;
-using MonogramsLib.Interfaces;
 using MonogramsLib.Managers;
 using MonogramsLib.Models;
 using MonogramsLib.Models.Events;
@@ -173,9 +172,9 @@ namespace MonogramsLib
 			UpdateLineConditions(RowsConditions, rowIndex);
 		}
 
-		private void UpdateLineConditions(IEnumerable<ConditionsPack> rowsConditions, int lineIndex)
+		private void UpdateLineConditions(IEnumerable<ConditionsPack> lineConditions, int lineIndex)
 		{
-			var pack = rowsConditions.ElementAt(lineIndex).Conditions.Where(c => !c.IsDone);
+			var pack = lineConditions.ElementAt(lineIndex).Conditions.Where(c => !c.IsDone);
 
 			foreach (var item in pack)
 			{

@@ -132,6 +132,9 @@
     <Compile Include="Infrastructure\Events\PointsRangeEventArgs.cs" />
     <Compile Include="Infrastructure\Extensions\ColorExtension.cs" />
     <Compile Include="Infrastructure\Interfaces\ICellSelectionManager.cs" />
+    <Compile Include="Infrastructure\Interfaces\IImageManager.cs" />
+    <Compile Include="Infrastructure\Interfaces\ILevelSelectionManager.cs" />
+    <Compile Include="Infrastructure\Managers\LevelSelectionManager.cs" />
     <Compile Include="Infrastructure\Managers\ImageManager.cs" />
     <Compile Include="Infrastructure\Managers\CellSelectionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,16 +5,15 @@ using MonogramsLib.Models.Events;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using UWP_Monograms.Infrastructure.Events;
 using UWP_Monograms.Infrastructure.Interfaces;
-using UWP_Monograms.Infrastructure.Managers;
 
 namespace UWP_Monograms.ViewModels
 {
 	public class MainViewModel : Screen
 	{
 		private readonly ICellSelectionManager _cellSelectionManager;
+		private readonly ILevelSelectionManager _levelSelectionManager;
 
 		private ObservableCollection<ConditionPackViewModel> _columnsConditions;
 		private ObservableCollection<ConditionPackViewModel> _rowsConditions;
@@ -50,35 +49,37 @@ namespace UWP_Monograms.ViewModels
 			}
 		}
 
-		public Monogram Monogram;
+		public Monogram Monogram { get; set; }
 
 		public CellViewModel[,] CellsArray { get; set; }
 
-		public MainViewModel(ICellSelectionManager cellSelectionManager)
+		public MainViewModel(
+			ICellSelectionManager cellSelectionManager,
+			ILevelSelectionManager levelSelectionManager)
 		{
 			_cellSelectionManager = cellSelectionManager;
+			_levelSelectionManager = levelSelectionManager;
 
-			InitializeMonogram(@"Assets\Images\1.png");
+			InitializeMonogram(0);
 		}
 
-		public void InitializeMonogram(string path)
+		public void InitializeMonogram(int level)
 		{
 			Monogram = new Monogram();
 			Monogram.CellOpened += OnMonogramCellOpened;
 			Monogram.ConditionDone += OnConditionDone;
 
-			InitializeField(path);
+			InitializeField(level);
 
 			_cellSelectionManager.SetCells(CellsArray);
 			_cellSelectionManager.SendRange += CellSelectionManager_SendRange;
 		}
 
-		public void InitializeField(string path)
+		public void InitializeField(int levelIndex)
 		{
-			var image = Task.Run(async () => await ImageManager.GetImage(path)).Result;
+			var level = _levelSelectionManager.GetLevel(levelIndex);
 
-			Monogram.GenerateFrom(image);
-			CellsArray = new CellViewModel[Monogram.Height, Monogram.Width];
+			Monogram.GenerateFrom(level);
 
 			ColumnsConditions = new ObservableCollection<ConditionPackViewModel>(GetConditions(Monogram.ColumnsConditions));
 			RowsConditions = new ObservableCollection<ConditionPackViewModel>(GetConditions(Monogram.RowsConditions));
@@ -104,6 +105,9 @@ namespace UWP_Monograms.ViewModels
 
 		private void CreateCells()
 		{
+			CellsArray = new CellViewModel[Monogram.Height, Monogram.Width];
+			Cells = new ObservableCollection<CellViewModel>();
+
 			for (int x = 0; x < Monogram.Width; x++)
 			{
 				for (int y = 0; y < Monogram.Height; y++)
@@ -114,10 +118,10 @@ namespace UWP_Monograms.ViewModels
 						X = x,
 						Y = y,
 					};
+
+					Cells.Add(CellsArray[y, x]);
 				}
 			}
-
-			Cells = new ObservableCollection<CellViewModel>(CellsArray.Cast<CellViewModel>());
 		}
 
 		public void ResetField()
@@ -139,9 +143,9 @@ namespace UWP_Monograms.ViewModels
 
 		private void OnConditionDone(object sender, ConditionDoneEventArgs e)
 		{
-			RowsConditions.SelectMany(x => x.Conditions).FirstOrDefault(x => x.ConditionItem == e.Condition)?.UpdateState();
-
-			ColumnsConditions.SelectMany(x => x.Conditions).FirstOrDefault(x => x.ConditionItem == e.Condition)?.UpdateState();
+			RowsConditions.Concat(ColumnsConditions)
+				.SelectMany(x => x.Conditions)
+				.FirstOrDefault(x => x.ConditionItem == e.Condition)?.UpdateState();
 		}
 	}
 }
