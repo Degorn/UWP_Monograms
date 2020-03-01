@@ -6,9 +6,9 @@ namespace MonogramsLib.Models
 {
 	public class ConditionsPack : IEnumerable
 	{
-		public IEnumerable<IConditionItem> Conditions { get; set; }
+		public IEnumerable<ConditionItem> Conditions { get; set; }
 
-		public ConditionsPack(IEnumerable<IConditionItem> conditions)
+		public ConditionsPack(IEnumerable<ConditionItem> conditions)
 		{
 			Conditions = conditions;
 		}

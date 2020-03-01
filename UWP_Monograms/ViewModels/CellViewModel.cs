@@ -26,11 +26,7 @@ namespace UWP_Monograms.ViewModels
 			}
 		}
 
-		public Brush Color
-		{
-			get => Cell.CurrentColor.ToBrush();
-		}
-
+		public Brush Color => Cell.CurrentColor.ToBrush();
 
 		public delegate void CellActionEventHandler(object sender, CellActionEventArgs e);
 		public event CellActionEventHandler OnHoverIn;

@@ -21,19 +21,19 @@ namespace UWP_Monograms.Views
 		private void OnRestartTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitField(@"Assets\Images\2.png");
+			ViewModel.InitializeMonogram(@"Assets\Images\2.png");
 		}
 
 		private void OnFirstImageButtonTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitField(@"Assets\Images\1.png");
+			ViewModel.InitializeMonogram(@"Assets\Images\1.png");
 		}
 
 		private void OnSecondImageButtonTapped(object sender, TappedRoutedEventArgs e)
 		{
 			ViewModel.ResetField();
-			ViewModel.InitField(@"Assets\Images\2.png");
+			ViewModel.InitializeMonogram(@"Assets\Images\2.png");
 		}
 	}
 }

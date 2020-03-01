@@ -1,8 +1,9 @@
 ﻿using System.Drawing;
+using MonogramsLib.Interfaces;
 
 namespace MonogramsLib.Models
 {
-	public class Cell
+	public class Cell : ICell
 	{
 		private readonly Color _contentColor;
 
@@ -25,6 +26,11 @@ namespace MonogramsLib.Models
 		{
 			Opened = true;
 			CurrentColor = _contentColor;
+		}
+
+		public bool Equals(ICell other)
+		{
+			return CanBeOpened.Equals(other.CanBeOpened);
 		}
 	}
 }

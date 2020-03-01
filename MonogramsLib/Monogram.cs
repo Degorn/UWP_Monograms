@@ -1,6 +1,8 @@
 ﻿using MonogramsLib.Extensions;
+using MonogramsLib.Interfaces;
 using MonogramsLib.Managers;
 using MonogramsLib.Models;
+using MonogramsLib.Models.Events;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,15 +25,16 @@ namespace MonogramsLib
 		public int Width { get; private set; }
 		public int Height { get; private set; }
 
-		public ICollection<ConditionsPack> RowsConditions { get; set; }
-		public ICollection<ConditionsPack> ColumnsConditions { get; set; }
+		public IEnumerable<ConditionsPack> RowsConditions { get; set; }
+		public IEnumerable<ConditionsPack> ColumnsConditions { get; set; }
 
 		#region Events
 
-		public delegate void CellClickedEventHandler(Cell sender, Point point);
-
 		public event CellClickedEventHandler CellOpened;
 		public event CellClickedEventHandler WrongCellClicked;
+
+		public event ConditionDoneEventHandler ConditionDone;
+
 		public event EventHandler GameFinished;
 
 		#endregion
@@ -148,22 +151,44 @@ namespace MonogramsLib
 
 			if (!cell.CanBeOpened)
 			{
-				WrongCellClicked?.Invoke(cell, new Point(x, y));
+				WrongCellClicked?.Invoke(this, new CellClickedEventArgs
+				{
+					Cell = cell
+				});
 			}
 
 			cell.Open();
-			CellOpened?.Invoke(cell, new Point(x, y));
+			CellOpened?.Invoke(this, new CellClickedEventArgs
+			{
+				Cell = cell
+			});
 
 			UpdateConditions(x, y);
 			CheckGameStatus();
 		}
 
-		private void UpdateConditions(int x, int y)
+		private void UpdateConditions(int columnIndex, int rowIndex)
 		{
-			var pack = RowsConditions.ElementAt(x).Conditions.Where(c => !c.IsDone);
+			UpdateLineConditions(ColumnsConditions, columnIndex);
+			UpdateLineConditions(RowsConditions, rowIndex);
+		}
+
+		private void UpdateLineConditions(IEnumerable<ConditionsPack> rowsConditions, int lineIndex)
+		{
+			var pack = rowsConditions.ElementAt(lineIndex).Conditions.Where(c => !c.IsDone);
+
 			foreach (var item in pack)
 			{
+				if (item.Cells == null || item.Cells.Any(c => !c.Opened))
+				{
+					continue;
+				}
 
+				item.Complete();
+				ConditionDone?.Invoke(this, new ConditionDoneEventArgs
+				{
+					Condition = item,
+				});
 			}
 		}
 

@@ -67,7 +67,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="models:ConditionsPack">
+                    <DataTemplate x:DataType="models1:ConditionPackViewModel">
                         <ItemsControl ItemsSource="{x:Bind Conditions, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -77,8 +77,8 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="models:ConditionItem">
-                                    <components:ConditionCellControl Model="{x:Bind Mode=OneWay}"
+                                <DataTemplate x:DataType="models1:ConditionCellViewModel">
+                                    <components:ConditionCellControl ViewModel="{x:Bind Mode=OneWay}"
                                                                      Width="32"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -95,7 +95,7 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="models:ConditionsPack">
+                    <DataTemplate x:DataType="models1:ConditionPackViewModel">
                         <ItemsControl ItemsSource="{x:Bind Conditions, Mode=OneWay}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -105,8 +105,8 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="models:ConditionItem">
-                                    <components:ConditionCellControl Model="{x:Bind Mode=OneWay}"
+                                <DataTemplate x:DataType="models1:ConditionCellViewModel">
+                                    <components:ConditionCellControl ViewModel="{x:Bind Mode=OneWay}"
                                                                      Height="32"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

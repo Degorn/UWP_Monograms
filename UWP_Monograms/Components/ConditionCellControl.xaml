@@ -29,8 +29,8 @@
                                          AlternativeStyle="{StaticResource DoneConditionBorderStyle}"/>
     </UserControl.Resources>
 
-    <Border Style="{x:Bind Model.IsDone, Mode=OneWay, Converter={StaticResource StyleConverter}}">
+    <Border Style="{x:Bind ViewModel.IsDone, Mode=OneWay, Converter={StaticResource StyleConverter}}">
         <TextBlock Style="{StaticResource ConditionTextBlockStyle}"
-                   Text="{x:Bind Model.Value, Mode=OneWay}"/>
+                   Text="{x:Bind ViewModel.ConditionItem.Value, Mode=OneWay}"/>
     </Border>
 </UserControl>

@@ -18,6 +18,20 @@ namespace MonogramsLib.Extensions
 					.ToArray();
 		}
 
+		public static T[][] GetColumns<T>(this T[,] matrix)
+		{
+			return Enumerable.Range(0, matrix.GetWidth())
+					.Select(x => matrix.GetColumn(x))
+					.ToArray();
+		}
+
+		public static T[][] GetRows<T>(this T[,] matrix)
+		{
+			return Enumerable.Range(0, matrix.GetHeight())
+					.Select(x => matrix.GetRow(x))
+					.ToArray();
+		}
+
 		public static int GetHeight<T>(this T[,] matrix)
 		{
 			return matrix.GetLength(0);
