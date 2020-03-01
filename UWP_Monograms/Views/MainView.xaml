@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:MonogramsLib.Models"
-    xmlns:conditions="using:UWP_Monograms.Components.Conditions"
     xmlns:components="using:UWP_Monograms.Components"
     xmlns:models1="using:UWP_Monograms.ViewModels"
     mc:Ignorable="d"
@@ -26,10 +25,6 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
-
-        <DataTemplate x:Key="Dd">
-            
-        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -83,7 +78,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="models:ConditionItem">
-                                    <conditions:ConditionCellControl Model="{x:Bind Mode=OneWay}"
+                                    <components:ConditionCellControl Model="{x:Bind Mode=OneWay}"
                                                                      Width="32"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -111,7 +106,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="models:ConditionItem">
-                                    <conditions:ConditionCellControl Model="{x:Bind Mode=OneWay}"
+                                    <components:ConditionCellControl Model="{x:Bind Mode=OneWay}"
                                                                      Height="32"/>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -138,7 +133,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            
         </Grid>
     </Grid>
 </Page>

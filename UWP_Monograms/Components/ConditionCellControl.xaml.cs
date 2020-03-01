@@ -1,7 +1,7 @@
 ﻿using MonogramsLib.Models;
 using Windows.UI.Xaml.Controls;
 
-namespace UWP_Monograms.Components.Conditions
+namespace UWP_Monograms.Components
 {
 	public sealed partial class ConditionCellControl : UserControl
 	{

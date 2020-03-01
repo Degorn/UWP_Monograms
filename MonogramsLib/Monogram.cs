@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.Linq;
 
 namespace MonogramsLib
 {
@@ -153,7 +154,17 @@ namespace MonogramsLib
 			cell.Open();
 			CellOpened?.Invoke(cell, new Point(x, y));
 
+			UpdateConditions(x, y);
 			CheckGameStatus();
+		}
+
+		private void UpdateConditions(int x, int y)
+		{
+			var pack = RowsConditions.ElementAt(x).Conditions.Where(c => !c.IsDone);
+			foreach (var item in pack)
+			{
+
+			}
 		}
 
 		private void CheckGameStatus()
